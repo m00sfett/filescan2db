@@ -8,6 +8,8 @@ import sqlite3
 import time
 from typing import Dict
 
+from . import __version__
+
 DB_NAME = "files.db"
 LOG_NAME = "error.log"
 COMMIT_EVERY = 10000
@@ -108,19 +110,22 @@ def scan_directory(
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Return parsed command line arguments."""
+
     parser = argparse.ArgumentParser(
         description="Recursively scan a directory and store file metadata in SQLite",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument("path", help="Directory to scan")
     parser.add_argument(
         "--db",
         default=DB_NAME,
-        help=f"Output SQLite database file (default: {DB_NAME})",
+        help="Output SQLite database file",
     )
     parser.add_argument(
         "--log",
         default=LOG_NAME,
-        help=f"Log file for errors (default: {LOG_NAME})",
+        help="Log file for errors",
     )
     parser.add_argument(
         "--commit-every",
@@ -128,15 +133,22 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=COMMIT_EVERY,
         help="Commit after processing this many files",
     )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Run the command line interface and return an exit status."""
+
     args = parse_args(argv)
     target = args.path
 
     if not os.path.isdir(target):
-        print(f"Fehler: '{target}' ist kein Verzeichnis.")
+        print(f"Error: '{target}' is not a directory.")
         return 2
 
     setup_logging(args.log)
@@ -145,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
     start = time.time()
     total = scan_directory(target, conn, cur, commit_every=args.commit_every)
     duration = time.time() - start
-    print(f"Fertig: {total} Dateien in {duration:.1f} s gescannt.")
+    print(f"Done: scanned {total} files in {duration:.1f} s.")
     return 0
 
 
