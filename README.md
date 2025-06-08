@@ -1,4 +1,4 @@
-# Filescan2SQLite
+# filescan2db
 
 A small utility to scan a directory tree and store file metadata in a SQLite database.
 
@@ -23,17 +23,17 @@ Or for development:
 
 ```bash
 git clone <repo-url>
-cd filescan2sqlite
+cd filescan2db
 pip install -e .
 ```
 
 ## Usage
 
 ```bash
-python -m filescan2sqlite <directory>
+python -m filescan2db <directory>
 ```
 
-See `filescan2sqlite --help` for optional arguments.
+See `filescan2db --help` for optional arguments.
 
 ## Tests
 

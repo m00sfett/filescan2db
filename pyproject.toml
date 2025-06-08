@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "filescan2sqlite"
+name = "filescan2db"
 version = "0.2.0"
 description = "Scan directories recursively and store file metadata in SQLite"
 authors = [
@@ -18,4 +18,4 @@ classifiers = [
 ]
 
 [project.scripts]
-filescan2sqlite = "filescan2sqlite.main:main"
+filescan2db = "filescan2db.main:main"

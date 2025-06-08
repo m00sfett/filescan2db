@@ -1,4 +1,4 @@
-"""Command-line interface for filescan2sqlite."""
+"""Command-line interface for filescan2db"""
 from __future__ import annotations
 
 import argparse
