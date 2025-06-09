@@ -98,15 +98,15 @@ filescan2db --version
 
 ### Flag Overview
 
-- `--db FILE` – SQLite database file
-- `--log FILE` – log errors to FILE
-- `--hash[=ALG1,ALG2]` – enable hashing. Omit value for interactive selection
+- `--db FILE` – output SQLite database file (default `files.db`)
+- `--log FILE` – log errors to FILE (default `filescan2db_errors.log`)
+- `--hash[=ALG1,ALG2]` – enable hashing; omit value for interactive selection
 - `-u`, `--updatedb` DBASE – update an existing database with hash columns
 - `--safe` – create a backup when updating a database
-- `--commit-every N` – commit after N files
 - `-l` – suppress log file creation
 - `-fo` – force overwrite of the log file
 - `-fa` – force append to the log file without prompts
+- `--commit-every N` – commit after N files
 - `--help`, `--version` – show CLI help or version
 
 ---
