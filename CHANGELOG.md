@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.1] - 2025-06-09
 ### Changed
 - Updated README examples and flag overview to match CLI options
+- Updated .gitignore file to match new code sepecifications
 
 ## [0.3.0] - 2024-04-06
 ### Added
