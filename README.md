@@ -64,17 +64,8 @@ filescan2db /data/projects --hash=xxhash_64,blake3,sha256
 
 ---
 
-### 4. **Update only changed or new files**
 
-Ideal for incremental scanning:
-
-```bash
-filescan2db /media --update
-```
-
----
-
-### 5. **Interactive hash selection**
+### 4. **Interactive hash selection**
 
 Let the tool ask which hashes to use:
 
@@ -85,27 +76,18 @@ filescan2db ~/Downloads --hash
 
 ---
 
-### 6. **Verbose logging**
 
-Get detailed error messages and process info:
-
-```bash
-filescan2db /data --hash=sha256 --verbose
-```
-
----
-
-### 7. **Convert a legacy database**
+### 5. **Convert a legacy database**
 
 Useful when upgrading to a new schema:
 
 ```bash
-filescan2db --update legacy.db
+filescan2db --updatedb legacy.db
 ```
 
 ---
 
-### 8. **Help and version info**
+### 6. **Help and version info**
 
 Display help or current version:
 
@@ -117,12 +99,16 @@ filescan2db --version
 ---
 
 ### Flag Overview
-
-- `--hash=ALG1,ALG2` – optional: `md5`, `sha1`, `sha256`, `sha3`, `blake3`, `xxhash_32/64/128`
-- `--update` – update records if files are new or changed
-- `--verbose` or `-v` – enable detailed logging
+- `--db FILE` – SQLite database file
+- `--log FILE` – log errors to FILE
+- `--hash[=ALG1,ALG2]` – enable hashing. Omit value for interactive selection
+- `-u`, `--updatedb` DBASE – update an existing database with hash columns
+- `--safe` – create a backup when updating a database
+- `--commit-every N` – commit after N files
+- `-l` – suppress log file creation
+- `-fo` – force overwrite of the log file
+- `-fa` – force append to the log file without prompts
 - `--help`, `--version` – show CLI help or version
-
 ---
 
 ## Hashing
