@@ -64,7 +64,6 @@ filescan2db /data/projects --hash=xxhash_64,blake3,sha256
 
 ---
 
-
 ### 4. **Interactive hash selection**
 
 Let the tool ask which hashes to use:
@@ -75,7 +74,6 @@ filescan2db ~/Downloads --hash
 ```
 
 ---
-
 
 ### 5. **Convert a legacy database**
 
@@ -99,6 +97,7 @@ filescan2db --version
 ---
 
 ### Flag Overview
+
 - `--db FILE` – SQLite database file
 - `--log FILE` – log errors to FILE
 - `--hash[=ALG1,ALG2]` – enable hashing. Omit value for interactive selection
@@ -109,6 +108,7 @@ filescan2db --version
 - `-fo` – force overwrite of the log file
 - `-fa` – force append to the log file without prompts
 - `--help`, `--version` – show CLI help or version
+
 ---
 
 ## Hashing
@@ -133,6 +133,7 @@ The following hashing algorithms are supported:
 | `sha3`        | `hashlib`      | 🔴 Slowest        | High security, but slower and less commonly used in performance-critical scenarios. |
 
 ¹ Relative speed estimated for real-world workloads:
+
 - 70% of space large files (>100 MB)
 - 20% of space medium files (1–100 MB)
 - 10% of space many small files (<1 MB)
