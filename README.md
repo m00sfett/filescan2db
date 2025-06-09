@@ -30,14 +30,100 @@ cd filescan2db
 pip install -e .
 ```
 
-## Usage
+## Usage Examples
+
+Below is a collection of typical use cases where `filescan2db` can help you manage and analyze your filesystem data efficiently.
+
+### 1. **Basic directory scan**
+
+Scan a directory (including subdirectories) and store metadata in the database:
 
 ```bash
-python -m filescan2db <directory>
+filescan2db /path/to/directory
 ```
 
-See `filescan2db --help` for optional arguments.
-Use `filescan2db --version` to display the current version.
+---
+
+### 2. **Enable hashing – identify duplicates**
+
+Scan and compute `xxhash_64` hashes for fast duplicate detection:
+
+```bash
+filescan2db /data/backup --hash=xxhash_64
+```
+
+---
+
+### 3. **Use multiple hash algorithms – data integrity**
+
+For security and validation, combine several algorithms:
+
+```bash
+filescan2db /data/projects --hash=xxhash_64,blake3,sha256
+```
+
+---
+
+### 4. **Update only changed or new files**
+
+Ideal for incremental scanning:
+
+```bash
+filescan2db /media --update
+```
+
+---
+
+### 5. **Interactive hash selection**
+
+Let the tool ask which hashes to use:
+
+```bash
+filescan2db ~/Downloads --hash
+# → Prompt: "Which algorithms would you like to use? (md5,sha1,...)"
+```
+
+---
+
+### 6. **Verbose logging**
+
+Get detailed error messages and process info:
+
+```bash
+filescan2db /data --hash=sha256 --verbose
+```
+
+---
+
+### 7. **Convert a legacy database**
+
+Useful when upgrading to a new schema:
+
+```bash
+filescan2db --update legacy.db
+```
+
+---
+
+### 8. **Help and version info**
+
+Display help or current version:
+
+```bash
+filescan2db --help
+filescan2db --version
+```
+
+---
+
+### Flag Overview
+
+- `--hash=ALG1,ALG2` – optional: `md5`, `sha1`, `sha256`, `sha3`, `blake3`, `xxhash_32/64/128`
+- `--update` – update records if files are new or changed
+- `--verbose` or `-v` – enable detailed logging
+- `--help`, `--version` – show CLI help or version
+
+---
 
 ## Hashing
 
