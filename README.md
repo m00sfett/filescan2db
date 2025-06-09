@@ -79,26 +79,6 @@ Non-cryptographic hashes like `xxhash` are fast but have a higher theoretical co
 
 > If a required library is missing (e.g. `xxhash` or `blake3`), the corresponding hash algorithm is skipped and a warning is logged.
 
-
-### Hashing
-
-Optional hashing of files is enabled with `--hash`. Provide a comma separated
-list of algorithms or omit the value to choose interactively.
-
-Supported algorithms:
-
-- `md5` – requires the Python `hashlib` module (built-in)
-- `sha1` – built-in via `hashlib`
-- `sha256` – built-in via `hashlib`
-- `sha3` – SHA3-256, built-in via `hashlib`
-- `blake3` – requires the optional `blake3` package
-- `xxhash_32` – requires the optional `xxhash` package
-- `xxhash_64` – requires the optional `xxhash` package
-- `xxhash_128` – requires the optional `xxhash` package
-
-If a library is missing, the corresponding hash will be skipped and an error is
-reported.
-
 ## Tests
 
 ```bash
