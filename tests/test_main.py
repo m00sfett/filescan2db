@@ -25,6 +25,26 @@ def test_scan_directory(tmp_path):
     conn.close()
 
 
+def test_scan_directory_no_duplicates(tmp_path):
+    data_dir = tmp_path / "data_dup"
+    data_dir.mkdir()
+    sample = data_dir / "file.txt"
+    sample.write_text("hello")
+
+    db_path = tmp_path / "dup.db"
+    conn, cur = setup_db(db_path)
+
+    first = scan_directory(str(data_dir), conn, cur, commit_every=1)
+    assert first == 1
+
+    second = scan_directory(str(data_dir), conn, cur, commit_every=1)
+    assert second == 0
+
+    cur.execute("SELECT COUNT(*) FROM files")
+    assert cur.fetchone()[0] == 1
+    conn.close()
+
+
 def test_version_cli(tmp_path):
     env = os.environ.copy()
     env["PYTHONPATH"] = str(pathlib.Path(__file__).resolve().parents[1]/"src")
