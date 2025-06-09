@@ -11,18 +11,15 @@ consistency, maintainability, and alignment with project goals.
 
 ## General instructions
 
-- Discard lines in triple parentheses `((( ... )))` as they are placeholders for
-  project-specific information.
+- Discard lines in triple parentheses `((( ... )))` as they are placeholders for project-specific information.
 
 ## Project Context
 
 ((( - **Language:** Python ≥ 3.9 )))
 
-- **Style:** Functional and modular
+- **Style:** Functional and modular; KISS-style.
 - **Structure:** `src/` layout with `pyproject.toml`
 - **Tests:** `pytest` under `tests/`
-
-((( - **Objective:** Build a CLI tool for x (see `README.md`) )))
 
 ---
 
@@ -91,7 +88,8 @@ def foo(bar: str) -> int:
 ## Context & Reference
 
 > When in doubt, follow patterns from existing modules (e.g., `src/projectname/features.py`).  
-> Experimental code under `experimental/` is exempt from full compliance but must be clearly marked and excluded from releases.
+> Experimental code in experimental/ does not need to meet all compliance standards,
+  but must be clearly marked and omitted from releases.
 
 ---
 
