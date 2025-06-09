@@ -195,6 +195,36 @@ def scan_directory(
                 continue
             try:
                 st = os.stat(full)
+                query = (
+                    f"SELECT size, ctime, mtime"
+                    + ("," + ",".join(hash_algos) if hash_algos else "")
+                    + " FROM files WHERE path_id=? AND name=? AND size=? AND ctime=? AND mtime=?"
+                )
+                params = (
+                    parent_id,
+                    name,
+                    st.st_size,
+                    int(st.st_ctime),
+                    int(st.st_mtime),
+                )
+                cur.execute(query, params)
+                existing = cur.fetchone()
+
+                if existing:
+                    missing = []
+                    for idx, algo in enumerate(hash_algos or [], start=3):
+                        if existing[idx] is None:
+                            missing.append(algo)
+                    if missing:
+                        hashes = compute_hashes(full, missing)
+                        assignments = ",".join(f"{algo}=?" for algo in missing)
+                        sql = (
+                            f"UPDATE files SET {assignments}"
+                            " WHERE path_id=? AND name=? AND size=? AND ctime=? AND mtime=?"
+                        )
+                        cur.execute(sql, [hashes.get(a) for a in missing] + list(params))
+                    continue
+
                 hashes = compute_hashes(full, hash_algos) if hash_algos else {}
                 columns = ["path_id", "name", "size", "ctime", "mtime"] + (hash_algos if hash_algos else [])
                 placeholders = ",".join(["?"] * len(columns))

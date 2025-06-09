@@ -11,6 +11,7 @@ Record information about regular files (name, size, creation and modification ti
 - Simple command line interface
 - Display program version with `--version`
 - Batch commits for good performance
+- Skips unchanged files to avoid duplicates
 - Error logging with timestamps
 - Optional hashing of file contents
 - Command to update legacy databases
